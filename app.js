@@ -37,20 +37,6 @@ function showStep(stepNumber) {
     target.classList.remove('hidden');
   }
 
-  // Make #next-button belong to the currently visible step
-  document.querySelectorAll('.step-content button').forEach(button => {
-    if (button.textContent.trim() === 'Next Step') {
-      button.id = 'next-button-inactive';
-    }
-  });
-
-  if (target) {
-    const nextButton = target.querySelector('button.btn--primary');
-    if (nextButton && nextButton.textContent.trim() === 'Next Step') {
-      nextButton.id = 'next-button';
-    }
-  }
-
   stepItems.forEach(item => item.classList.remove('active'));
 
   if (typeof stepNumber === 'number') {
