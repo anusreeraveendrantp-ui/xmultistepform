@@ -37,6 +37,7 @@ function showStep(stepNumber) {
     target.classList.remove('hidden');
   }
 
+  // Keep the original button IDs unchanged.
   stepItems.forEach(item => item.classList.remove('active'));
 
   if (typeof stepNumber === 'number') {
@@ -51,6 +52,8 @@ function showStep(stepNumber) {
     state.currentStep = stepNumber;
   }
 }
+
+
 
 function clearErrors() {
   document.querySelectorAll('.error-msg').forEach(el => el.textContent = '');
