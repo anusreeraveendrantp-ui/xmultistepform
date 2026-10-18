@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 274 568" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sidebar-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="hsl(243,100%,62%)"/>
+      <stop offset="100%" stop-color="hsl(213,96%,18%)"/>
+    </linearGradient>
+  </defs>
+  <rect width="274" height="568" rx="10" fill="url(#sidebar-grad)"/>
+  <!-- Decorative circles -->
+  <circle cx="230" cy="480" r="120" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+  <circle cx="230" cy="480" r="80" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+</svg>

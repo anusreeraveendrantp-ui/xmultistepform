@@ -1,0 +1,744 @@
+/* =============================================
+   CSS Custom Properties
+   ============================================= */
+:root {
+  /* Primary colors */
+  --clr-marine-blue: hsl(213, 96%, 18%);
+  --clr-purplish-blue: hsl(243, 100%, 62%);
+  --clr-pastel-blue: hsl(228, 100%, 84%);
+  --clr-light-blue: hsl(206, 94%, 87%);
+  --clr-strawberry-red: hsl(354, 84%, 57%);
+
+  /* Neutral colors */
+  --clr-cool-gray: hsl(231, 11%, 63%);
+  --clr-light-gray: hsl(229, 24%, 87%);
+  --clr-magnolia: hsl(217, 100%, 97%);
+  --clr-alabaster: hsl(231, 100%, 99%);
+  --clr-white: hsl(0, 0%, 100%);
+
+  /* Addon highlight */
+  --clr-addon-bg: hsl(228, 100%, 98%);
+
+  /* Typography */
+  --font: 'Ubuntu', 'Segoe UI', system-ui, sans-serif;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+
+  /* Spacing */
+  --sidebar-width: 274px;
+  --content-padding: 48px;
+}
+
+/* =============================================
+   Reset & Base
+   ============================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font);
+  font-size: 16px;
+  background-color: var(--clr-magnolia);
+  color: var(--clr-marine-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* =============================================
+   App Container
+   ============================================= */
+.app-container {
+  display: flex;
+  background-color: var(--clr-white);
+  border-radius: 16px;
+  box-shadow: 0 25px 40px -10px hsla(228, 26%, 45%, 0.25);
+  width: min(940px, 95vw);
+  min-height: 568px;
+  padding: 16px;
+  gap: 0;
+}
+
+/* =============================================
+   Sidebar
+   ============================================= */
+.sidebar {
+  background-image: url('assets/bg-sidebar-desktop.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: var(--clr-purplish-blue);
+  border-radius: 10px;
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  padding: 40px 32px;
+}
+
+.step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.step-circle {
+  width: 33px;
+  height: 33px;
+  border-radius: 50%;
+  border: 1px solid var(--clr-white);
+  color: var(--clr-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: var(--fw-bold);
+  flex-shrink: 0;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.step-item.active .step-circle {
+  background-color: var(--clr-light-blue);
+  color: var(--clr-marine-blue);
+  border-color: var(--clr-light-blue);
+}
+
+.step-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.step-label {
+  font-size: 12px;
+  color: var(--clr-pastel-blue);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.step-name {
+  font-size: 14px;
+  font-weight: var(--fw-bold);
+  color: var(--clr-white);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* =============================================
+   Content Area
+   ============================================= */
+.content-area {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  padding: 0 16px;
+  position: relative;
+}
+
+.step-content {
+  display: flex;
+  flex-direction: column;
+  padding: var(--content-padding) 24px var(--content-padding) 40px;
+  width: 100%;
+}
+
+.step-content.hidden {
+  display: none;
+}
+
+.step-content h1 {
+  font-size: 32px;
+  font-weight: var(--fw-bold);
+  color: var(--clr-marine-blue);
+  margin-bottom: 8px;
+}
+
+.step-description {
+  color: var(--clr-cool-gray);
+  font-size: 16px;
+  margin-bottom: 35px;
+  line-height: 1.6;
+}
+
+/* =============================================
+   Step Actions (button row)
+   ============================================= */
+.step-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.step-actions--right {
+  justify-content: flex-end;
+}
+
+/* =============================================
+   Buttons
+   ============================================= */
+.btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: var(--fw-medium);
+  transition: opacity 0.15s, background-color 0.15s;
+}
+
+.btn--primary {
+  background-color: var(--clr-marine-blue);
+  color: var(--clr-white);
+}
+
+.btn--primary:hover {
+  background-color: hsl(213, 96%, 28%);
+}
+
+.btn--confirm {
+  background-color: var(--clr-purplish-blue);
+  color: var(--clr-white);
+  padding: 12px 28px;
+}
+
+.btn--confirm:hover {
+  background-color: hsl(243, 100%, 72%);
+}
+
+.btn--ghost {
+  color: var(--clr-cool-gray);
+  background: none;
+  padding-left: 0;
+}
+
+.btn--ghost:hover {
+  color: var(--clr-marine-blue);
+}
+
+.btn-link {
+  color: var(--clr-cool-gray);
+  font-size: 14px;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.15s;
+}
+
+.btn-link:hover {
+  color: var(--clr-purplish-blue);
+}
+
+/* =============================================
+   Forms — Step 1
+   ============================================= */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-weight: var(--fw-medium);
+  color: var(--clr-marine-blue);
+}
+
+.form-group input {
+  padding: 12px 16px;
+  border: 1px solid var(--clr-light-gray);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: var(--fw-medium);
+  color: var(--clr-marine-blue);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.form-group input::placeholder {
+  color: var(--clr-cool-gray);
+  font-weight: var(--fw-regular);
+}
+
+.form-group input:focus {
+  border-color: var(--clr-purplish-blue);
+}
+
+.form-group input.is-invalid {
+  border-color: var(--clr-strawberry-red);
+}
+
+/* =============================================
+   Error Messages
+   ============================================= */
+.error-msg {
+  color: var(--clr-strawberry-red);
+  font-size: 14px;
+  font-weight: var(--fw-bold);
+}
+
+.error-msg--block {
+  display: block;
+  margin-top: 8px;
+  min-height: 1.2em;
+}
+
+/* =============================================
+   Plan Cards — Step 2
+   ============================================= */
+.plan-cards {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+
+.plan_card {
+  flex: 1;
+  border: 1px solid var(--clr-light-gray);
+  border-radius: 8px;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+  outline: none;
+}
+
+.plan_card:hover {
+  border-color: var(--clr-purplish-blue);
+}
+
+.plan_card.selected,
+.plan_card[aria-checked="true"] {
+  border-color: var(--clr-purplish-blue);
+  background-color: var(--clr-magnolia);
+}
+
+.plan_card:focus-visible {
+  outline: 2px solid var(--clr-purplish-blue);
+  outline-offset: 2px;
+}
+
+.plan-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.plan-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.plan-name {
+  font-weight: var(--fw-bold);
+  font-size: 16px;
+  color: var(--clr-marine-blue);
+}
+
+.plan-price {
+  font-size: 14px;
+  color: var(--clr-cool-gray);
+}
+
+.plan-yearly-bonus {
+  font-size: 12px;
+  font-weight: var(--fw-medium);
+  color: var(--clr-marine-blue);
+}
+
+.plan-yearly-bonus.hidden {
+  display: none;
+}
+
+/* =============================================
+   Billing Toggle — Step 2
+   ============================================= */
+.billing-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  background-color: var(--clr-magnolia);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 8px;
+}
+
+.billing-label {
+  font-size: 14px;
+  font-weight: var(--fw-bold);
+  color: var(--clr-cool-gray);
+  transition: color 0.15s;
+}
+
+.billing-label.active {
+  color: var(--clr-marine-blue);
+}
+
+.toggle-btn {
+  width: 38px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: var(--clr-marine-blue);
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--clr-white);
+  transition: transform 0.2s;
+}
+
+.toggle-btn[aria-pressed="true"] .toggle-thumb {
+  transform: translateX(18px);
+}
+
+/* =============================================
+   Add-on Cards — Step 3
+   ============================================= */
+.addon-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.addon_card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  border: 1px solid var(--clr-light-gray);
+  border-radius: 8px;
+  padding: 18px 24px;
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.addon_card:hover {
+  border-color: var(--clr-purplish-blue);
+}
+
+.addon_card input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  accent-color: var(--clr-purplish-blue);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.addon_card.checked,
+.addon_card:has(input:checked) {
+  border-color: var(--clr-purplish-blue);
+  background-color: var(--clr-addon-bg);
+}
+
+.addon-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.addon-name {
+  font-weight: var(--fw-bold);
+  font-size: 16px;
+  color: var(--clr-marine-blue);
+}
+
+.addon-desc {
+  font-size: 14px;
+  color: var(--clr-cool-gray);
+}
+
+.addon-price {
+  font-size: 14px;
+  color: var(--clr-purplish-blue);
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+}
+
+/* =============================================
+   Summary — Step 4
+   ============================================= */
+.summary-box {
+  background-color: var(--clr-magnolia);
+  border-radius: 8px;
+  padding: 16px 24px;
+  margin-bottom: 24px;
+}
+
+.summary-plan {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.summary-plan-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.summary-plan-name {
+  font-weight: var(--fw-bold);
+  font-size: 16px;
+  color: var(--clr-marine-blue);
+}
+
+.summary-plan-price {
+  font-weight: var(--fw-bold);
+  font-size: 16px;
+  color: var(--clr-marine-blue);
+}
+
+.summary-divider {
+  border: none;
+  border-top: 1px solid var(--clr-light-gray);
+  margin: 12px 0;
+}
+
+.summary-addons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 0;
+}
+
+.summary-addon-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-addon-name {
+  font-size: 14px;
+  color: var(--clr-cool-gray);
+}
+
+.summary-addon-price {
+  font-size: 14px;
+  color: var(--clr-marine-blue);
+  font-weight: var(--fw-medium);
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+}
+
+.total-label {
+  font-size: 14px;
+  color: var(--clr-cool-gray);
+}
+
+.total-price {
+  font-size: 20px;
+  font-weight: var(--fw-bold);
+  color: var(--clr-purplish-blue);
+}
+
+/* =============================================
+   Thank You Screen
+   ============================================= */
+.thank-you {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.thank-you-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  max-width: 440px;
+}
+
+.thank-you-icon {
+  width: 80px;
+  height: 80px;
+}
+
+.thank-you-content h1 {
+  margin-bottom: 0;
+}
+
+.thank-you-content p {
+  font-size: 16px;
+  color: var(--clr-cool-gray);
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+/* =============================================
+   Responsive — Mobile
+   ============================================= */
+@media (max-width: 680px) {
+  body {
+    align-items: flex-start;
+    background-color: var(--clr-magnolia);
+  }
+
+  .app-container {
+    flex-direction: column;
+    width: 100%;
+    min-height: 100dvh;
+    border-radius: 0;
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  /* Mobile sidebar becomes a top bar */
+  .sidebar {
+    width: 100%;
+    border-radius: 0;
+    background-image: url('assets/bg-sidebar-mobile.svg');
+    background-size: cover;
+    background-color: var(--clr-purplish-blue);
+    padding: 32px 0 70px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .step-list {
+    flex-direction: row;
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .step-info {
+    display: none;
+  }
+
+  .content-area {
+    padding: 0 16px;
+    margin-top: -48px;
+  }
+
+  .step-content {
+    background-color: var(--clr-white);
+    border-radius: 12px;
+    padding: 32px 24px;
+    box-shadow: 0 10px 25px -5px hsla(228, 26%, 45%, 0.15);
+  }
+
+  .step-content h1 {
+    font-size: 24px;
+  }
+
+  .step-description {
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+
+  /* Keep actions at bottom on mobile */
+  .step-actions {
+    background-color: var(--clr-white);
+    padding: 16px 24px;
+    margin: 16px -24px -32px;
+    border-radius: 0 0 12px 12px;
+  }
+
+  /* Plan cards stack vertically on mobile */
+  .plan-cards {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .plan_card {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .plan_card .plan-details {
+    gap: 2px;
+  }
+
+  /* Add-on cards */
+  .addon_card {
+    padding: 14px 16px;
+    gap: 16px;
+  }
+
+  .addon-name {
+    font-size: 14px;
+  }
+
+  .addon-desc {
+    font-size: 12px;
+  }
+
+  .addon-price {
+    font-size: 12px;
+  }
+
+  /* Summary */
+  .summary-total {
+    padding: 0 8px;
+  }
+
+  .total-price {
+    font-size: 18px;
+  }
+
+  /* Thank you */
+  .thank-you {
+    min-height: 320px;
+  }
+
+  .thank-you-icon {
+    width: 56px;
+    height: 56px;
+  }
+}
