@@ -228,19 +228,20 @@ function renderSummary() {
 }
 
 // ─── Step Navigation ──────────────────────────────────────────────────────────
+// Step 1 → 2
+document.getElementById('next-button').addEventListener('click', () => {
+  if (validateStep1()) showStep(2);
+});
 
-document.addEventListener('click', (event) => {
-  const button = event.target.closest('#next-button');
-  if (!button) return;
+// Step 2 → 3
+document.getElementById('next-button-2').addEventListener('click', () => {
+  if (validateStep2()) showStep(3);
+});
 
-  if (state.currentStep === 1) {
-    if (validateStep1()) showStep(2);
-  } else if (state.currentStep === 2) {
-    if (validateStep2()) showStep(3);
-  } else if (state.currentStep === 3) {
-    renderSummary();
-    showStep(4);
-  }
+// Step 3 → 4
+document.getElementById('next-button-3').addEventListener('click', () => {
+  renderSummary();
+  showStep(4);
 });
 
 // Confirm → Thank You
