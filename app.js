@@ -44,14 +44,15 @@ function showStep(stepNumber) {
   document.querySelectorAll('.step-content .btn--primary')
     .forEach(button => button.removeAttribute('id'));
 
-  // Give the visible step's primary button the ID Cypress expects.
   if (target && typeof stepNumber === 'number') {
-    const activeButton = target.querySelector('.btn--primary');
+  const activeButton = target.querySelector(
+    'button.btn--primary, button#confirm-button'
+  );
 
-    if (activeButton) {
-      activeButton.id = 'next-button';
-    }
+  if (activeButton) {
+    activeButton.id = 'next-button';
   }
+}
 
   stepItems.forEach(item => item.classList.remove('active'));
 
