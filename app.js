@@ -24,20 +24,35 @@ function formatPrice(amount, yearly) {
 }
 
 
+
 function showStep(stepNumber) {
   stepContents.forEach(section => {
     section.classList.add('hidden');
   });
 
   const target = document.getElementById(
-    stepNumber === 'thank-you' ? 'step-thank-you' : `step-${stepNumber}`
+    stepNumber === 'thank-you'
+      ? 'step-thank-you'
+      : `step-${stepNumber}`
   );
 
   if (target) {
     target.classList.remove('hidden');
   }
 
-  // Keep the original button IDs unchanged.
+  // Remove the shared ID from every step's primary button.
+  document.querySelectorAll('.step-content .btn--primary')
+    .forEach(button => button.removeAttribute('id'));
+
+  // Give the visible step's primary button the ID Cypress expects.
+  if (target && typeof stepNumber === 'number') {
+    const activeButton = target.querySelector('.btn--primary');
+
+    if (activeButton) {
+      activeButton.id = 'next-button';
+    }
+  }
+
   stepItems.forEach(item => item.classList.remove('active'));
 
   if (typeof stepNumber === 'number') {
@@ -52,6 +67,7 @@ function showStep(stepNumber) {
     state.currentStep = stepNumber;
   }
 }
+
 
 
 
@@ -232,7 +248,11 @@ function renderSummary() {
 
 // ─── Step Navigation ──────────────────────────────────────────────────────────
 
-function handleNextStep() {
+
+document.addEventListener('click', event => {
+  const button = event.target.closest('button#next-button');
+  if (!button) return;
+
   if (state.currentStep === 1) {
     if (validateStep1()) showStep(2);
   } else if (state.currentStep === 2) {
@@ -240,17 +260,9 @@ function handleNextStep() {
   } else if (state.currentStep === 3) {
     renderSummary();
     showStep(4);
+  } else if (state.currentStep === 4) {
+    showStep('thank-you');
   }
-}
-
-document.getElementById('next-button').addEventListener('click', handleNextStep);
-document.getElementById('next-button-2').addEventListener('click', handleNextStep);
-document.getElementById('next-button-3').addEventListener('click', handleNextStep);
-
-
-// Confirm → Thank You
-document.getElementById('confirm-button').addEventListener('click', () => {
-  showStep('thank-you');
 });
 
 // Go Back buttons (delegated)
