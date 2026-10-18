@@ -23,6 +23,7 @@ function formatPrice(amount, yearly) {
   return yearly ? `$${amount}/yr` : `$${amount}/mo`;
 }
 
+
 function showStep(stepNumber) {
   stepContents.forEach(section => {
     section.classList.add('hidden');
@@ -31,13 +32,36 @@ function showStep(stepNumber) {
   const target = document.getElementById(
     stepNumber === 'thank-you' ? 'step-thank-you' : `step-${stepNumber}`
   );
-  if (target) target.classList.remove('hidden');
 
-  // Update sidebar active state (only for steps 1-4)
+  if (target) {
+    target.classList.remove('hidden');
+  }
+
+  // Make #next-button belong to the currently visible step
+  document.querySelectorAll('.step-content button').forEach(button => {
+    if (button.textContent.trim() === 'Next Step') {
+      button.id = 'next-button-inactive';
+    }
+  });
+
+  if (target) {
+    const nextButton = target.querySelector('button.btn--primary');
+    if (nextButton && nextButton.textContent.trim() === 'Next Step') {
+      nextButton.id = 'next-button';
+    }
+  }
+
   stepItems.forEach(item => item.classList.remove('active'));
+
   if (typeof stepNumber === 'number') {
-    const activeItem = document.querySelector(`.step-item[data-step="${stepNumber}"]`);
-    if (activeItem) activeItem.classList.add('active');
+    const activeItem = document.querySelector(
+      `.step-item[data-step="${stepNumber}"]`
+    );
+
+    if (activeItem) {
+      activeItem.classList.add('active');
+    }
+
     state.currentStep = stepNumber;
   }
 }
@@ -219,20 +243,18 @@ function renderSummary() {
 
 // ─── Step Navigation ──────────────────────────────────────────────────────────
 
-// Step 1 → 2
-document.getElementById('next-button').addEventListener('click', () => {
-  if (validateStep1()) showStep(2);
-});
+document.addEventListener('click', (event) => {
+  const button = event.target.closest('#next-button');
+  if (!button) return;
 
-// Step 2 → 3
-document.getElementById('next-button-2').addEventListener('click', () => {
-  if (validateStep2()) showStep(3);
-});
-
-// Step 3 → 4 (Summary)
-document.getElementById('next-button-3').addEventListener('click', () => {
-  renderSummary();
-  showStep(4);
+  if (state.currentStep === 1) {
+    if (validateStep1()) showStep(2);
+  } else if (state.currentStep === 2) {
+    if (validateStep2()) showStep(3);
+  } else if (state.currentStep === 3) {
+    renderSummary();
+    showStep(4);
+  }
 });
 
 // Confirm → Thank You
